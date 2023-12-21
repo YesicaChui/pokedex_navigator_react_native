@@ -1,15 +1,19 @@
-import { StyleSheet, Text, View } from 'react-native'
-import {dataTipos} from '../Data/dataTipos'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { dataTipos } from '../Data/dataTipos'
 import { FlatList } from 'react-native'
 
-const TipoPokemon = () => {
+const TipoPokemon = ({ navigation }) => {
   return (
     <>
       <FlatList
         style={styles.container}
-        data={dataTipos()}
+        data={["Todos",...dataTipos()]}
         keyExtractor={item => item}
-        renderItem={({ item }) => <Text>{item}</Text>}
+        renderItem={({ item }) => (
+          <Pressable style={styles.containerItem} onPress={() => navigation.navigate("List", { tipo:item.toUpperCase() })} >
+            <Text>{item.toUpperCase()}</Text>
+          </Pressable>
+        )}
       />
     </>
   )
@@ -18,8 +22,17 @@ const TipoPokemon = () => {
 export default TipoPokemon
 
 const styles = StyleSheet.create({
-  container:{
-      width:"100%",
-      
+  container: {
+    width: "100%",
+
+  },
+  containerItem: {
+    width: "80%",
+    marginHorizontal: "10%",
+    backgroundColor: "green",
+    margin: 10,
+    padding: 10,
+    justifyContent: "center",
+    alignItems: "center"
   }
 })

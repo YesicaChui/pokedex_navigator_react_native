@@ -1,12 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StatusBar} from 'react-native';
 import TipoPokemon from './src/Screens/TipoPokemon';
+import ListPokemon from './src/Screens/ListPokemon';
+import Navigator from './src/navigation/Navigator';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <TipoPokemon/>
-    </View>
+    <>
+      <StatusBar
+        backgroundColor={"gray"}
+      />
+      <Navigator />
+    </>
   );
 }
 
