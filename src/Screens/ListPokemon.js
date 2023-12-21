@@ -19,7 +19,7 @@ const ListPokemon = ({navigation,route}) => {
       style={styles.container}
       data={pokemons}
       keyExtractor={item => item.num}
-      renderItem={({ item }) => <PokemonItem pokemon={item} />}
+      renderItem={({ item }) => <PokemonItem pokemon={item} navigation={navigation} />}
     />
   )
 }

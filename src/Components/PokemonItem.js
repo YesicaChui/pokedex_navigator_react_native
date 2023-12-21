@@ -1,9 +1,9 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const PokemonItem = ({ pokemon }) => {
+const PokemonItem = ({ pokemon,navigation }) => {
   return (
-    <Pressable style={styles.container} >
+    <Pressable style={styles.container}  onPress={()=>navigation.navigate("Detalle Pokemon",{id:pokemon.num})}>
       <Image
         style={styles.image}
         resizeMode='cover'
