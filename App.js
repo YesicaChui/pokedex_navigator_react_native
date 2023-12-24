@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, StatusBar} from 'react-native';
 import TipoPokemon from './src/Screens/TipoPokemon';
 import ListPokemon from './src/Screens/ListPokemon';
-import Navigator from './src/navigation/Navigator';
+import TabNavigator from './src/navigation/TabNavigator';
 
 export default function App() {
   return (
@@ -9,7 +9,7 @@ export default function App() {
       <StatusBar
         backgroundColor={"gray"}
       />
-      <Navigator />
+      <TabNavigator />
     </>
   );
 }
