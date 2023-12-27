@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, StatusBar} from 'react-native';
-import TipoPokemon from './src/Screens/TipoPokemon';
-import ListPokemon from './src/Screens/ListPokemon';
 import TabNavigator from './src/navigation/TabNavigator';
+import { store } from './src/app/store'
+import { Provider } from 'react-redux'
 
 export default function App() {
   return (
@@ -9,7 +9,9 @@ export default function App() {
       <StatusBar
         backgroundColor={"gray"}
       />
-      <TabNavigator />
+       <Provider store={store}>
+        <TabNavigator/>
+      </Provider>
     </>
   );
 }

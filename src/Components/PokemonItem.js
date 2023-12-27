@@ -1,5 +1,6 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import FavoritoButton from './FavoritoButton'
 
 const PokemonItem = ({ pokemon,navigation }) => {
   return (
@@ -10,6 +11,7 @@ const PokemonItem = ({ pokemon,navigation }) => {
         source={{ uri: pokemon.img }}
       />
       <Text style={styles.text}>{pokemon.name}</Text>
+      <FavoritoButton/>
     </Pressable>
   )
 }
@@ -32,14 +34,14 @@ const styles = StyleSheet.create({
     gap: 30
   },
   text: {
-    width: "60%",
+    width: "40%",
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 15,
     color:"white"
   },
   image: {
-    minWidth: 90,
-    height: 90,
-    width: "30%"
+    minWidth: 60,
+    height: 60,
+    width: "20%"
   }
 })
