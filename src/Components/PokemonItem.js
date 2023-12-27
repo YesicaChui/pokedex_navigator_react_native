@@ -11,7 +11,7 @@ const PokemonItem = ({ pokemon,navigation }) => {
         source={{ uri: pokemon.img }}
       />
       <Text style={styles.text}>{pokemon.name}</Text>
-      <FavoritoButton/>
+      <FavoritoButton pokemon={pokemon}/>
     </Pressable>
   )
 }

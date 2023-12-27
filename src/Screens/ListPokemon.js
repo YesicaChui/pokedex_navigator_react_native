@@ -7,10 +7,8 @@ const ListPokemon = ({navigation,route}) => {
   const [pokemons, setPokemons] = useState(allPokemon.pokemon)
   const { tipo } = route.params
   useEffect(() => {
-    console.log(tipo)
     if(tipo!="TODOS"){
       const pokemonFiltered = pokemons.filter(pokemon => pokemon.type.includes(tipo.toLowerCase()))
-      console.log(pokemonFiltered)
       setPokemons(pokemonFiltered)
     }
   }, [])

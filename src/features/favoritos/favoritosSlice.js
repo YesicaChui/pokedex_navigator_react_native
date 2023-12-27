@@ -6,15 +6,19 @@ export const favoritosSlice = createSlice({
         value:[]
     },
     reducers:{
-        addPokemon: (state,action) => {
-            console.log(action.payload)
-        },
-        removePokemon: (state,action) =>{
-          console.log(action.payload)
-        },        
+        updateListaFavoritos: (state, action) => {
+            const pokemon = action.payload;
+            const index = state.value.findIndex((favorito) => favorito.num === pokemon.num);
+      
+            if (index === -1) {
+              state.value.push(pokemon);
+            } else {
+              state.value.splice(index, 1);
+            }
+          },    
     }
 })
 
-export const {addPokemon,removePokemon} = favoritosSlice.actions
+export const {updateListaFavoritos} = favoritosSlice.actions
 
 export default favoritosSlice.reducer

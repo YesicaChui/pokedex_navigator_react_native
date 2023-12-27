@@ -22,7 +22,7 @@ const DetallePokemon = ({ route }) => {
       <Text style={styles.title}>{pokemon.name}</Text>
       <Text>{pokemon.about}</Text>
       <View style={styles.favoritoBox}>
-        <FavoritoButton />
+        <FavoritoButton pokemon={pokemon}/>
       </View>
     </View>
   )

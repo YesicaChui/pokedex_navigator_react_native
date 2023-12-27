@@ -4,10 +4,10 @@ import FavoritoButton from './FavoritoButton';
 const PokemonCard = ({ pokemon }) => {
   return (
     <View style={styles.cardContainer}>
-      <Image style={styles.image} resizeMode='cover' source={{ uri: pokemon.img }} />
+      <Image style={styles.image} resizeMode='contain' source={{ uri: pokemon.img }} />
       <Text style={styles.name}>{pokemon.name}</Text>
       <Text style={styles.types}>{pokemon.type.join(' / ')}</Text>
-      <FavoritoButton />
+      <FavoritoButton pokemon={pokemon}/>
     </View>
   );
 };
@@ -16,7 +16,8 @@ export default PokemonCard;
 
 const styles = StyleSheet.create({
   cardContainer: {
-    flex: 1,
+    width:"45%",
+    // flex:1,
     margin: 8,
     borderRadius: 8,
     backgroundColor: '#fff',
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 150, // Ajusta la altura según tus necesidades
+    height: 150, 
   },
   name: {
     fontSize: 16,
