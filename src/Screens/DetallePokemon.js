@@ -13,18 +13,21 @@ const DetallePokemon = ({ route }) => {
 
   }, [id])
   return (
-    <View style={styles.contain}>
-      <Image
-        style={styles.image}
-        resizeMode='contain'
-        source={{ uri: pokemon.img }}
-      />
-      <Text style={styles.title}>{pokemon.name}</Text>
-      <Text>{pokemon.about}</Text>
-      <View style={styles.favoritoBox}>
-        <FavoritoButton pokemon={pokemon}/>
+    <>
+      {console.log(pokemon.num)}
+      <View style={styles.contain}>
+        <Image
+          style={styles.image}
+          resizeMode='contain'
+          source={{ uri: pokemon.img }}
+        />
+        <Text style={styles.title}>{pokemon.name}</Text>
+        <Text>{pokemon.about}</Text>
+        <View style={styles.favoritoBox}>
+          <FavoritoButton pokemon={pokemon} />
+        </View>
       </View>
-    </View>
+    </>
   )
 }
 
@@ -46,8 +49,8 @@ const styles = StyleSheet.create({
   favoritoBox: {
     // backgroundColor: "red",
     flexDirection: 'row',
-    width:"100%",
-    justifyContent:'flex-end',
-    paddingEnd:20
+    width: "100%",
+    justifyContent: 'flex-end',
+    paddingEnd: 20
   }
 })
