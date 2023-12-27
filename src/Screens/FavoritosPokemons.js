@@ -1,11 +1,19 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
+import allPokemon from '../Data/pokemon.json'
+import PokemonItem from '../Components/PokemonItem'
+import { useState } from 'react'
+import PokemonCard from '../Components/PokemonCard'
 
 const FavoritosPokemons = () => {
+  const [pokemons, setPokemons] = useState(allPokemon.pokemon)
   return (
-    <View>
-      <Text>FavoritosPokemons</Text>
-    </View>
+    <FlatList
+    style={styles.container}
+    data={pokemons}
+    numColumns={2}
+    keyExtractor={item => item.num}
+    renderItem={({ item }) => <PokemonCard pokemon={item}/>}
+  />
   )
 }
 

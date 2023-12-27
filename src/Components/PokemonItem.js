@@ -40,8 +40,7 @@ const styles = StyleSheet.create({
     color:"white"
   },
   image: {
-    minWidth: 60,
-    height: 60,
-    width: "20%"
+    width: 70,
+    height: 70,
   }
 })
