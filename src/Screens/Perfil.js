@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
 import { StyleSheet, Image, View } from 'react-native'
 import AddButton from '../Components/AddButton'
 import * as ImagePicker from 'expo-image-picker'
+import * as FileSystem from 'expo-file-system';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch,useSelector } from 'react-redux';
+import { selectProfileImage,setProfileImage  } from '../features/users/userSlice';
+
 
 const Perfil = () => {
-
-  const [image, setImage] = useState("")
-
-  useEffect(() => {
-  }, [])
-
+  const dispatch = useDispatch();
+  const profileImage = useSelector(selectProfileImage);
   const pickImage = async () => {
 
     const { granted } = await ImagePicker.requestCameraPermissionsAsync()
@@ -24,7 +24,14 @@ const Perfil = () => {
       })
 
       if (!result.canceled) {
-        setImage('data:image/jpeg;base64,' + result.assets[0].base64)
+        const rutaImagen = `${FileSystem.documentDirectory}foto_perfil.jpg`;
+        await FileSystem.writeAsStringAsync(
+          rutaImagen,
+          result.assets[0].base64,
+          { encoding: FileSystem.EncodingType.Base64 }
+        );
+        await AsyncStorage.setItem('rutaFotoPerfil', rutaImagen);
+        dispatch(setProfileImage('data:image/jpeg;base64,' + result.assets[0].base64));
       }
     }
 
@@ -34,7 +41,7 @@ const Perfil = () => {
   return (
     <View style={styles.container}>
       <Image
-        source={image ? { uri: image } : require("../../assets/user.png")}
+        source={profileImage ? { uri: profileImage } : require("../../assets/user.png")}
         style={styles.image}
         resizeMode='cover'
 
@@ -56,8 +63,4 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200
   },
-  text: {
-
-
-  }
 })
