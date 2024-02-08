@@ -1,17 +1,19 @@
-import { StyleSheet, Image, View } from 'react-native'
+import { StyleSheet, Image, View, Text } from 'react-native'
 import AddButton from '../Components/AddButton'
 import * as ImagePicker from 'expo-image-picker'
 // import * as FileSystem from 'expo-file-system';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import { selectProfileImage, setProfileImage } from '../features/users/userSlice';
 import { useGetProfileImageQuery, usePostProfileImageMutation } from '../app/services/pokemonServices';
 import { useEffect, useState } from 'react';
+import { clearUser } from '../features/auth/authSlice'
 const Perfil = () => {
-
+  const dispatch = useDispatch()
   const [profileImage, setProfileImage] = useState("")
   const [triggerProfileImage] = usePostProfileImageMutation()
   const localId = useSelector(state => state.auth.value.localId)
+  const email = useSelector(state => state.auth.value.email)
   const { data, isSuccess } = useGetProfileImageQuery(localId)
 
   useEffect(() => {
@@ -39,13 +41,14 @@ const Perfil = () => {
 
   }
 
-/*   const confirmImage = () => {
-    triggerProfileImage({localId,dataImagen})
-} */
+  const cerrarSesion = ()=>{
+    dispatch(clearUser())
+  }
 
 
   return (
     <View style={styles.container}>
+
       <Image
         source={profileImage ? { uri: profileImage } : require("../../assets/user.png")}
         style={styles.image}
@@ -53,7 +56,8 @@ const Perfil = () => {
 
       />
       <AddButton title="Tomar foto" onPress={pickImage} />
-
+      <Text>{email}</Text>
+      <AddButton title="Cerrar Sesion" onPress={cerrarSesion} />
     </View>
   )
 }

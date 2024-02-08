@@ -17,16 +17,17 @@ export const authSlice = createSlice({
         state.value.idToken = action.payload.idToken
         state.value.localId = action.payload.localId
     },
-    clearUser: (state) => {
-        state.value.email = null
-        state.value.idToken = null
-        state.value.localId = null
-
+    clearUser: (state) =>  {
+      state.value = {  // Devuelve un nuevo objeto de estado para garantizar la inmutabilidad
+        email: null,
+        idToken: null,
+        localId: null
+      };
     }
   },
 })
 
 
-export const { setUser } = authSlice.actions
+export const { setUser,clearUser } = authSlice.actions
 
 export default authSlice.reducer
