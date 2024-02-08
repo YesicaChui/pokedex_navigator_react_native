@@ -1,31 +1,17 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
-import * as FileSystem from 'expo-file-system';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectProfileImage, setProfileImage } from '../features/users/userSlice';
+import { useSelector } from 'react-redux';
+import { useGetProfileImageQuery } from '../app/services/pokemonServices';
 
 const Header = ({ title = "Inicio" }) => {
-  const dispatch = useDispatch();
-
-  const profileImage = useSelector(selectProfileImage);
+  const [profileImage, setProfileImage] = useState("")
+  const localId = useSelector(state => state.auth.value.localId)
+  const { data, isSuccess } = useGetProfileImageQuery(localId)
 
   useEffect(() => {
-    const loadProfileImage = async () => {
-      try {
-        const storedImagePath = await AsyncStorage.getItem('rutaFotoPerfil');
-        console.log(storedImagePath)
-        if (storedImagePath) {
-          const base64Image = await FileSystem.readAsStringAsync(storedImagePath, { encoding: FileSystem.EncodingType.Base64 });
-          dispatch(setProfileImage('data:image/jpeg;base64,'+base64Image));
-        }
-      } catch (error) {
-        console.error('Error al cargar la imagen del perfil:', error);
-      }
-    };
+    if (isSuccess && data) setProfileImage(data.image)
+  }, [isSuccess,data])
 
-    loadProfileImage();
-  }, []);
   console.log(profileImage?.substring(0,30))
   return (
     <View style={styles.container}>
