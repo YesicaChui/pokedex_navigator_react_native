@@ -4,29 +4,47 @@ import InputForm from '../Components/InputForm'
 import SubmitButton from '../Components/SubmitButton'
 import { useSignupMutation } from '../app/services/auth'
 import { useDispatch } from 'react-redux'
-// import { setUser } from '../features/auth/authSlice'
-// import { signupSchema } from '../validations/signupSchema'
+import { setUser } from '../features/auth/authSlice'
+import { signupSchema } from '../validations/signupSchema'
 
 const Signup = ({navigation}) => {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const [triggerSignup,{data,isError,isSuccess,error,isLoading}] = useSignupMutation()
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
   const [confirmPassword,setConfirmPassword] = useState("")
+  const [emailError,setEmailError] = useState("")
+  const [passwordError,setPasswordError] = useState("")
+  const [confirmPasswordError,setConfirmPasswordError] = useState("")
 
-/*   useEffect(()=>{
+  useEffect(()=>{
     if(isSuccess) dispatch(setUser(data))
     if(isError) console.log(error)
-  },[data,isError,isSuccess]) */
+  },[data,isError,isSuccess])
 
 
   const onSubmit = () => {
     try {
-        //signupSchema.validateSync({email,password,confirmPassword})
+      setEmailError("")
+      setPasswordError("")
+      setConfirmPasswordError("")
+        signupSchema.validateSync({email,password,confirmPassword})
         triggerSignup({email,password})
     } catch (error) {
-        console.log(error.path)
-        console.log(error.message)
+      switch(error.path){
+        case "email":
+          setEmailError(error.message)
+          break
+        case "password":
+          setPasswordError(error.message)
+          break
+        case "confirmPassword":
+          setConfirmPasswordError(error.message)
+          break
+        default:
+          break
+
+      }
 
     }
   }
@@ -41,21 +59,21 @@ const Signup = ({navigation}) => {
             value={email}
             onChangeText={(t) => setEmail(t)}
             isSecure={false}
-            error=""
+            error={emailError}
           />
           <InputForm
             label="Password"
             value={password}
             onChangeText={(t) => setPassword(t)}
             isSecure={true}
-            error=""
+            error={passwordError}
           />
            <InputForm
             label="Confirm password"
             value={confirmPassword}
             onChangeText={(t) => setConfirmPassword(t)}
             isSecure={true}
-            error=""
+            error={confirmPasswordError}
 
           />
           <SubmitButton title="Send" onPress={onSubmit}  

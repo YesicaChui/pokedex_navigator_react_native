@@ -5,7 +5,7 @@ import InputForm from '../Components/InputForm'
 import SubmitButton from '../Components/SubmitButton'
 import { useLoginMutation } from '../app/services/auth'
 import { useDispatch } from 'react-redux'
-// import { setUser } from '../features/auth/authSlice'
+import { setUser } from '../features/auth/authSlice'
 
 const Login = ({ navigation }) => {
   const dispatch = useDispatch()
@@ -17,7 +17,7 @@ const Login = ({ navigation }) => {
       if(isSuccess){
         console.log("todo bien")
         console.log(data)
-        // dispatch(setUser(data))
+        dispatch(setUser(data))
         }
       if(isError) console.log(error)
     },[data,isError,isSuccess])

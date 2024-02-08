@@ -4,11 +4,13 @@ import userReducer from '../features/users/userSlice';
 import { pokemonApi } from './services/pokemonServices';
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { authApi } from './services/auth'
+import authReducer from "../features/auth/authSlice"
 
 export const store = configureStore({
   reducer: {
     favoritos: favoritoReducer,
     user: userReducer,
+    auth:authReducer,
     [pokemonApi.reducerPath]:pokemonApi.reducer, 
     [authApi.reducerPath]: authApi.reducer,
 
