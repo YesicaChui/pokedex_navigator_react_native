@@ -1,6 +1,7 @@
 import data from "../Data/pokemon.json"
 
 export const dataTipos = () => {
+
   let allTypes = [];
   data.pokemon.forEach(pokemon => {
     // Recorrer los tipos del Pokémon actual
