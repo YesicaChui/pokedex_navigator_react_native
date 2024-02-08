@@ -18,7 +18,7 @@ export const authSlice = createSlice({
         state.value.localId = action.payload.localId
     },
     clearUser: (state) =>  {
-      state.value = {  // Devuelve un nuevo objeto de estado para garantizar la inmutabilidad
+      state.value = { 
         email: null,
         idToken: null,
         localId: null

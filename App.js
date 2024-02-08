@@ -5,6 +5,12 @@ import { Provider } from 'react-redux'
 import Signup from './src/Screens/Signup';
 import Login from './src/Screens/Login';
 import MainNavigator from './src/navigation/MainNavigator';
+import { init } from './src/database';
+
+init()
+.then(() => console.log("DB Initialized"))
+.catch(err => console.log(err))
+
 
 export default function App() {
   return (
@@ -13,8 +19,6 @@ export default function App() {
         backgroundColor={"gray"}
       />
        <Provider store={store}>
-        {/* <TabNavigator/> */}
-        {/* <Login/> */}
         <MainNavigator/>
       </Provider>
     </>

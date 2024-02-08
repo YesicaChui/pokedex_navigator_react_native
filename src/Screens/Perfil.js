@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useGetProfileImageQuery, usePostProfileImageMutation } from '../app/services/pokemonServices';
 import { useEffect, useState } from 'react';
 import { clearUser } from '../features/auth/authSlice'
+import { deleteAllSession } from '../database';
 const Perfil = () => {
   const dispatch = useDispatch()
   const [profileImage, setProfileImage] = useState("")
@@ -42,7 +43,9 @@ const Perfil = () => {
   }
 
   const cerrarSesion = ()=>{
+    deleteAllSession().then(result => console.log(result))
     dispatch(clearUser())
+
   }
 
 
