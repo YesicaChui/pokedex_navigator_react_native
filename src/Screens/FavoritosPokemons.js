@@ -2,7 +2,7 @@ import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-nativ
 import PokemonCard from '../Components/PokemonCard'
 import { useSelector } from 'react-redux'
 
-const FavoritosPokemons = () => {
+const FavoritosPokemons = ({ navigation, route }) => {
   const PokemonFavoritos = useSelector((state) => state.favoritos.value)
 
   const onPress = () => {
@@ -18,7 +18,7 @@ const FavoritosPokemons = () => {
         data={PokemonFavoritos}
         numColumns={2}
         keyExtractor={item => item.num}
-        renderItem={({ item }) => <PokemonCard pokemon={item} />}
+        renderItem={({ item }) => <PokemonCard pokemon={item} navigation={navigation} />}
       />
 
     </>

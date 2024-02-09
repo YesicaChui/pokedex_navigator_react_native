@@ -38,4 +38,8 @@ const ListPokemon = ({ navigation, route }) => {
 
 export default ListPokemon
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container:{
+    marginBottom:100
+  }
+})

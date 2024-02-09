@@ -31,7 +31,7 @@ export default TipoPokemon
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-
+    marginBottom:100
   },
   containerItem: {
     width: "80%",
