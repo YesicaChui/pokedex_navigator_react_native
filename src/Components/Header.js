@@ -12,7 +12,6 @@ const Header = ({ title = "Inicio" }) => {
     if (isSuccess && data) setProfileImage(data.image)
   }, [isSuccess,data])
 
-  console.log(profileImage?.substring(0,30))
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{title}</Text>

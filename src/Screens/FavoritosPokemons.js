@@ -1,17 +1,20 @@
 import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import PokemonCard from '../Components/PokemonCard'
 import { useSelector } from 'react-redux'
+import { usePostFavoritosMutation } from '../app/services/pokemonServices'
 
 const FavoritosPokemons = ({ navigation, route }) => {
+  const localId = useSelector(state => state.auth.value.localId)
   const PokemonFavoritos = useSelector((state) => state.favoritos.value)
-
+  const [triggerPostFavoritos,{data,isSuccess,isError,error}] = usePostFavoritosMutation()
+  
   const onPress = () => {
-
+    triggerPostFavoritos({localId,favoritos:PokemonFavoritos})
   }
   return (
     <>
       <View style={styles.container2}>
-        <Button onPress={onPress} title='Guardar favoritos' color={'orange'} />
+        <Button onPress={onPress} title='Guardar Pokemon favoritos' color={'orange'} />
       </View>
       <FlatList
         style={styles.container}

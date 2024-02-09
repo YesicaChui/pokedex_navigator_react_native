@@ -6,10 +6,6 @@ import { useGetTiposQuery } from '../app/services/pokemonServices'
 
 const TipoPokemon = ({ navigation }) => {
   const {data:tipos} = useGetTiposQuery()
-
-/*   useEffect(()=>{
-    console.log(["Todos",...dataTipos()])
-  },[]) */
   return (
     <>
       <FlatList

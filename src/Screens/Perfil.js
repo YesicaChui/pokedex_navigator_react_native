@@ -34,18 +34,16 @@ const Perfil = () => {
 
       if (!result.canceled) {
         const image = 'data:image/jpeg;base64,' + result.assets[0].base64
-       triggerProfileImage({ localId, image })
+        triggerProfileImage({ localId, image })
         setProfileImage(image)
-        console.log(localId)
       }
     }
 
   }
 
-  const cerrarSesion = ()=>{
+  const cerrarSesion = () => {
     deleteAllSession().then(result => console.log(result))
     dispatch(clearUser())
-
   }
 
 

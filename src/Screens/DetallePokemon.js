@@ -14,7 +14,6 @@ const DetallePokemon = ({ route }) => {
   }, [id])
   return (
     <>
-      {console.log(pokemon.num)}
       <View style={styles.contain}>
         <Image
           style={styles.image}
