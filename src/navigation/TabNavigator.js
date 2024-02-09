@@ -12,6 +12,7 @@ const Tab = createBottomTabNavigator()
 const TabNavigator = () => {
   return (
       <Tab.Navigator
+      initialRouteName="PokemonStack" 
         screenOptions={{
           headerShown: false,
           tabBarShowLabel: false,

@@ -2,10 +2,24 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 // import { dataTipos } from '../Data/dataTipos'
 import { FlatList } from 'react-native'
 import { useEffect } from 'react'
-import { useGetTiposQuery } from '../app/services/pokemonServices'
+import { useGetFavoritosQuery, useGetTiposQuery } from '../app/services/pokemonServices'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateAllFavoritos } from '../features/favoritos/favoritosSlice'
 
 const TipoPokemon = ({ navigation }) => {
   const {data:tipos} = useGetTiposQuery()
+  const dispatch = useDispatch();
+  const localId = useSelector(state => state.auth.value.localId)
+  const { data: favoritos, isLoadingFavoritos } = useGetFavoritosQuery(localId);
+  useEffect(() => {
+    if (!isLoadingFavoritos) {
+      console.log(localId)
+      console.log(favoritos)
+      console.log("se actulizo los favoritos")
+      dispatch(updateAllFavoritos(favoritos||[]));
+    }
+
+  }, [favoritos])
   return (
     <>
       <FlatList

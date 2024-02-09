@@ -4,7 +4,7 @@ import { base_url } from '../../firebase/db'
 export const pokemonApi = createApi({
   reducerPath: 'pokemonApi',
   baseQuery: fetchBaseQuery({ baseUrl: base_url }),
-  tagTypes: ["image"],
+  tagTypes: ["image","favorito"],
   endpoints: (builder) => ({
     getPokemons: builder.query({
       query: (name) => `pokemon.json`,
@@ -21,8 +21,13 @@ export const pokemonApi = createApi({
         method: "PUT",
         body: favoritos
       }),
-    }),
+      invalidatesTags:["favorito"]
 
+    }),
+    getFavoritos: builder.query({
+      query: (localId) => `favoritos/${localId}.json`,
+      providesTags: ["favorito"]
+    }),
     postProfileImage: builder.mutation({
       query: ({ localId, image }) => {
         return {
@@ -40,4 +45,4 @@ export const pokemonApi = createApi({
   })
 })
 
-export const { useGetPokemonQuery, useGetPokemonsQuery, useGetTiposQuery, usePostProfileImageMutation, useGetProfileImageQuery, usePostFavoritosMutation } = pokemonApi
+export const { useGetPokemonQuery, useGetPokemonsQuery, useGetTiposQuery, usePostProfileImageMutation, useGetProfileImageQuery, usePostFavoritosMutation, useGetFavoritosQuery } = pokemonApi

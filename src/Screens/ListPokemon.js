@@ -1,13 +1,14 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native'
-import allPokemon from '../Data/pokemon.json'
 import { useEffect, useState } from 'react'
 import PokemonItem from '../Components/PokemonItem'
 import { useGetPokemonsQuery } from '../app/services/pokemonServices'
 
 const ListPokemon = ({ navigation, route }) => {
   const { data, isLoading } = useGetPokemonsQuery()
+
   const [pokemons, setPokemons] = useState([])
   const { tipo } = route.params
+
 
   useEffect(() => {
     if (!isLoading) {
@@ -20,6 +21,8 @@ const ListPokemon = ({ navigation, route }) => {
     }
 
   }, [data])
+
+
 
   return (
     <>
@@ -39,7 +42,7 @@ const ListPokemon = ({ navigation, route }) => {
 export default ListPokemon
 
 const styles = StyleSheet.create({
-  container:{
-    marginBottom:100
+  container: {
+    marginBottom: 100
   }
 })

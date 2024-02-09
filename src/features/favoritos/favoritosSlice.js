@@ -16,9 +16,12 @@ export const favoritosSlice = createSlice({
               state.value.splice(index, 1);
             }
           },    
+          updateAllFavoritos: (state, action) => {
+            state.value = action.payload; // Sustituir la lista completa de favoritos
+        },
     }
 })
 
-export const {updateListaFavoritos} = favoritosSlice.actions
+export const {updateListaFavoritos,updateAllFavoritos} = favoritosSlice.actions
 
 export default favoritosSlice.reducer
