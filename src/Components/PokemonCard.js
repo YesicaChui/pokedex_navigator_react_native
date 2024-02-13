@@ -6,7 +6,7 @@ const PokemonCard = ({ pokemon,navigation }) => {
 
 
     <View style={styles.cardContainer}>
-      <Pressable onPress={() => navigation.navigate("Detalle Pokemon", { id: pokemon.num })}>
+      <Pressable onPress={() => navigation.navigate("Detalle Pokemon", { pokemon: pokemon })}>
         <Image style={styles.image} resizeMode='contain' source={{ uri: pokemon.img }} />
         <Text style={styles.name}>{pokemon.name}</Text>
         <Text style={styles.types}>{pokemon.type.join(' / ')}</Text>
