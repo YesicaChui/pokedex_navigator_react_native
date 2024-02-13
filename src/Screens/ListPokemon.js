@@ -2,6 +2,7 @@ import { FlatList, StyleSheet, Text, View } from 'react-native'
 import { useEffect, useState } from 'react'
 import PokemonItem from '../Components/PokemonItem'
 import { useGetPokemonsQuery } from '../app/services/pokemonServices'
+import MiSpinner from '../Components/MiSpinner'
 
 const ListPokemon = ({ navigation, route }) => {
   const { data, isLoading } = useGetPokemonsQuery()
@@ -33,7 +34,7 @@ const ListPokemon = ({ navigation, route }) => {
           data={pokemons}
           keyExtractor={item => item.num}
           renderItem={({ item }) => <PokemonItem pokemon={item} navigation={navigation} />}
-        /> : ""
+        /> : <MiSpinner/>
       }
     </>
   )

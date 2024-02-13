@@ -4,19 +4,14 @@ Una aplicación para ayudar a jugadores de Pokemon Go con React Native que ofrec
 
 ## Funcionalidades Principales
 
-### Pantalla de Cuenta
-
-- **Acceso seguro:** Solo los usuarios autenticados pueden acceder a la pantalla de perfil ver sus pokemon favoritos.
-- **Información del usuario:** Muestra detalles del usuario como su foto y su correo con el que esta logeado.
-
-<img src="./screenshot/Screenshot_1705910419.png" width="300" >
-<img src="./screenshot/Screenshot_1705910424.png" width="300" >
+- **Acceso seguro:** Solo los usuarios autenticados pueden acceder a la pantalla de perfil ver sus propios pokemon favoritos.
 
 
 ### Autenticación con Firebase
 
 - Utiliza el sistema de autenticación de Firebase para gestionar el acceso de usuarios.
 - Permite a los usuarios iniciar sesión y registrarse de manera segura.
+
 <img src="./screenshot/login.jpeg" width="300" >
 <img src="./screenshot/registro.jpeg" width="300" >
 
