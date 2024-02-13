@@ -50,34 +50,34 @@ const Signup = ({ navigation }) => {
   return (
     <View style={styles.main}>
       <View style={styles.container}>
-        <Text style={styles.title} >Sign up</Text>
+        <Text style={styles.title} >Registrarse</Text>
         <InputForm
-          label="Email"
+          label="Correo Electronico"
           value={email}
           onChangeText={(t) => setEmail(t)}
           isSecure={false}
           error={emailError}
         />
         <InputForm
-          label="Password"
+          label="Contraseña"
           value={password}
           onChangeText={(t) => setPassword(t)}
           isSecure={true}
           error={passwordError}
         />
         <InputForm
-          label="Confirm password"
+          label="Confirmar Contraseña"
           value={confirmPassword}
           onChangeText={(t) => setConfirmPassword(t)}
           isSecure={true}
           error={confirmPasswordError}
 
         />
-        <SubmitButton title="Send" onPress={onSubmit}
+        <SubmitButton title="Registrarse" onPress={onSubmit}
         />
-        <Text style={styles.sub}>Alredy have an account?</Text>
+        <Text style={styles.sub}>Tienes una cuenta?</Text>
         <Pressable onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.subLink}>Login</Text>
+          <Text style={styles.subLink}>Ingresa</Text>
         </Pressable>
       </View>
     </View>
@@ -88,32 +88,68 @@ const Signup = ({ navigation }) => {
 export default Signup
 
 
+// Estilos actualizados
 const styles = StyleSheet.create({
   main: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "#F8F8F8", // Fondo más suave
   },
   container: {
     width: "90%",
-    backgroundColor: "green",
-    gap: 15,
+    backgroundColor: "#FFFFFF",
     borderRadius: 10,
-    justifyContent: "center",
+    paddingVertical: 20,
+    paddingHorizontal: 15,
     alignItems: "center",
-    paddingVertical: 20
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   title: {
     fontSize: 22,
-    fontFamily: "Roboto"
+    fontFamily: "Roboto",
+    marginBottom: 20,
   },
   sub: {
     fontSize: 14,
-    fontFamily: "Roboto"
+    fontFamily: "Roboto",
+    marginBottom: 10,
   },
   subLink: {
     fontSize: 14,
     fontFamily: "Roboto",
-    color: "blue"
-  }
-})
+    color: "blue",
+    textDecorationLine: "underline",
+  },
+  input: {
+    width: "100%",
+    backgroundColor: "#F0F0F0",
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    marginBottom: 10,
+  },
+  errorText: {
+    color: "red",
+    marginBottom: 10,
+  },
+  button: {
+    backgroundColor: "blue",
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+  },
+  buttonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontFamily: "Roboto",
+  },
+});
+

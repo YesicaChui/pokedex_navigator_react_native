@@ -1,91 +1,109 @@
-import { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Pressable } from 'react-native'
-// import { colors } from '../Global/colors'
-import InputForm from '../Components/InputForm'
-import SubmitButton from '../Components/SubmitButton'
-import { useLoginMutation } from '../app/services/auth'
-import { useDispatch } from 'react-redux'
-import { setUser } from '../features/auth/authSlice'
-import { insertSession } from '../database'
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Pressable, Alert } from 'react-native';
+import InputForm from '../Components/InputForm';
+import SubmitButton from '../Components/SubmitButton';
+import { useLoginMutation } from '../app/services/auth';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../features/auth/authSlice';
+import { insertSession } from '../database';
+import { signupSchema } from '../validations/signupSchema';
 
 const Login = ({ navigation }) => {
-  const dispatch = useDispatch()
-  const [triggerLogin, { data, isError, isSuccess, error, isLoading }] = useLoginMutation()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const dispatch = useDispatch();
+  const [triggerLogin, { data, isError, isSuccess, error, isLoading }] = useLoginMutation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (isSuccess) {
-      dispatch(setUser(data))
+      dispatch(setUser(data));
       insertSession(data)
         .then(result => console.log(result))
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
     }
-    if (isError) console.log(error)
-  }, [data, isError, isSuccess])
-
+    if (isError) {
+      // Manejo de errores de autenticación
+      if (error.status === 400) {
+        // Error de correo electrónico o contraseña incorrectos
+        Alert.alert('Error', 'Correo electrónico o contraseña incorrectos');
+      } else {
+        // Otros errores de autenticación
+        Alert.alert('Error', 'Error al iniciar sesión');
+      }
+    }
+  }, [data, isError, isSuccess, error]);
 
   const onSubmit = () => {
-    triggerLogin({ email, password })
-  }
+      triggerLogin({ email, password });
+  };
+
   return (
     <View style={styles.main}>
       <View style={styles.container}>
-        <Text style={styles.title} >Login to start</Text>
+        <Text style={styles.title}>Ingresa al Pokedex</Text>
         <InputForm
-          label="Email"
+          label="Correo electrónico"
           value={email}
           onChangeText={(t) => setEmail(t)}
           isSecure={false}
           error=""
         />
         <InputForm
-          label="Password"
+          label="Contraseña"
           value={password}
           onChangeText={(t) => setPassword(t)}
           isSecure={true}
           error=""
         />
-        <SubmitButton onPress={onSubmit} title="Send" />
-        <Text style={styles.sub}>Not have an account?</Text>
-        <Pressable onPress={() => navigation.navigate("Signup")} >
-          <Text style={styles.subLink}>Sign up</Text>
+        <SubmitButton onPress={onSubmit} title="Enviar" />
+        <Text style={styles.sub}>¿No tienes una cuenta?</Text>
+        <Pressable onPress={() => navigation.navigate("Signup")}>
+          <Text style={styles.subLink}>Regístrate</Text>
         </Pressable>
       </View>
     </View>
-  )
-}
+  );
+};
 
-
-export default Login
-
+export default Login;
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "#F8F8F8",
   },
   container: {
     width: "90%",
-    backgroundColor: "green",
-    gap: 15,
+    backgroundColor: "#FFFFFF",
     borderRadius: 10,
-    justifyContent: "center",
+    paddingVertical: 20,
+    paddingHorizontal: 15,
     alignItems: "center",
-    paddingVertical: 20
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   title: {
     fontSize: 22,
-    fontFamily: "Roboto"
+    fontFamily: "Roboto",
+    marginBottom: 20,
   },
   sub: {
     fontSize: 14,
-    fontFamily: "Roboto"
+    fontFamily: "Roboto",
+    marginBottom: 10,
   },
   subLink: {
     fontSize: 14,
     fontFamily: "Roboto",
-    color: "blue"
-  }
-})
+    color: "blue",
+    textDecorationLine: "underline",
+  },
+});
