@@ -1,13 +1,22 @@
-import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
+import {Alert, Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import PokemonCard from '../Components/PokemonCard'
 import { useSelector } from 'react-redux'
 import { usePostFavoritosMutation } from '../app/services/pokemonServices'
+import { useEffect } from 'react'
 
 const FavoritosPokemons = ({ navigation, route }) => {
   const localId = useSelector(state => state.auth.value.localId)
   const PokemonFavoritos = useSelector((state) => state.favoritos.value)
   const [triggerPostFavoritos,{data,isSuccess,isError,error}] = usePostFavoritosMutation()
-  
+  useEffect(() => {
+    if (isSuccess) {
+      Alert.alert('Éxito', 'Se han guardado los Pokémon favoritos exitosamente.');
+
+    }
+    if (isError) {
+      Alert.alert('Error', 'Ha ocurrido un error al guardar los Pokémon favoritos.');
+    }
+  }, [data, isError, isSuccess, error]);
   const onPress = () => {
     triggerPostFavoritos({localId,favoritos:PokemonFavoritos})
   }
