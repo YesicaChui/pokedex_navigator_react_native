@@ -14,7 +14,7 @@ const Header = ({ title = "Inicio" }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{title}</Text>
+      <Text style={styles.text}>{title.toUpperCase()}</Text>
       {profileImage ? (
         <Image source={{ uri: profileImage }} style={styles.image} resizeMode="cover" />
       ) : <Image
@@ -37,13 +37,17 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: 'row',
-    paddingHorizontal: 30
+    paddingHorizontal: 30,
+    paddingVertical: 10,
   },
   text: {
     fontSize: 20,
+    color: "white",
+    fontWeight:'700'
   },
   image: {
-    width: 40,
-    height: 40
+    width: 50,
+    height: 50,
+    borderRadius: 25,
   }
 })

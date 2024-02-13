@@ -21,7 +21,7 @@ const FavoritoButton = ({ pokemon }) => {
   }
   return (
     <Pressable onPress={() => actualizarListaFavoritos()}>
-      <Entypo name={favoritoSelected ? "star" : "star-outlined"} size={44} color="black" />
+      <Entypo name={favoritoSelected ? "star" : "star-outlined"} size={44} color="#66B3FF" />
     </Pressable>
   )
 }

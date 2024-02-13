@@ -57,7 +57,7 @@ const Perfil = () => {
 
       />
       <AddButton title="Tomar foto" onPress={pickImage} />
-      <Text>{email}</Text>
+      <Text   style={styles.perfil}>{email}</Text>
       <AddButton title="Cerrar Sesion" onPress={cerrarSesion} />
     </View>
   )
@@ -69,10 +69,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginTop: 20
+    marginTop: 20,
+  },
+  perfil:{
+    fontSize:18,
+    fontWeight:'700',
+    marginVertical:10
   },
   image: {
     width: 200,
-    height: 200
+    height: 200,
+    borderRadius: 100, 
+    marginBottom: 20,
   },
 })

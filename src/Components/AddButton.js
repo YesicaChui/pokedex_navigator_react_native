@@ -16,12 +16,14 @@ const styles = StyleSheet.create({
     container:{
         backgroundColor:'#40513B',
         width:"70%",
-        paddingVertical:8,
-        margin:10
+        paddingVertical: 12,
+        margin:10,
+        borderRadius: 8,
     },
     text:{
         color:"white",
         textAlign:"center",
-        fontSize:18
+        fontSize:18,
+        fontWeight: "bold", 
     }
 })

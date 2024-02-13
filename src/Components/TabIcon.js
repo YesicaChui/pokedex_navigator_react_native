@@ -5,8 +5,9 @@ import { EvilIcons } from '@expo/vector-icons';
 const TabIcon = ({icon,label,focused}) => {
   return (
     <View style={styles.container}>
-      <Entypo name={icon} size={40} color={focused ? "white" : "#aaa"}/>
-      <Text style={{...styles.text,...{color:focused ? "white" : "#aaa"}}}>{label}</Text>
+      <Entypo name={icon} size={40} color={focused ? "white" : "#aaa"} style={styles.icon}
+/>
+      <Text style={{...styles.label,...{color:focused ? "white" : "#aaa"}}}>{label}</Text>
     </View>
   )
 }
@@ -14,11 +15,14 @@ const TabIcon = ({icon,label,focused}) => {
 export default TabIcon
 
 const styles = StyleSheet.create({
-    container:{
-        alignItems:"center"
-    },
-    text:{
-        color:"white",
-        textAlign:"center"
-    }
+  container: {
+    alignItems: 'center',
+  },
+  icon: {
+    marginBottom: 5,
+  },
+  label: {
+    color: 'white',
+    textAlign: 'center',
+  },
 })

@@ -1,32 +1,45 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import allPokemon from '../Data/pokemon.json'
-import { useEffect, useState } from 'react'
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
 import FavoritoButton from '../Components/FavoritoButton'
+import { useEffect } from 'react'
 
 const DetallePokemon = ({ route }) => {
-  const { id } = route.params
-  const [pokemon, setPokemon] = useState({})
-  useEffect(() => {
+  const { pokemon } = route.params
 
-    const PokemonEncontrado = allPokemon.pokemon.find(pokemon => pokemon.num === id)
-    setPokemon(PokemonEncontrado)
+  useEffect(() => { }, [
+    console.log(pokemon.stats)
+  ])
 
-  }, [id])
   return (
-    <>
+    <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.contain}>
         <Image
           style={styles.image}
           resizeMode='contain'
           source={{ uri: pokemon.img }}
         />
-        <Text style={styles.title}>{pokemon.name}</Text>
-        <Text>{pokemon.about}</Text>
         <View style={styles.favoritoBox}>
+          <Text style={styles.title}>{pokemon.name}</Text>
           <FavoritoButton pokemon={pokemon} />
         </View>
+        <Text style={styles.description}>{pokemon.about}</Text>
+        <View style={styles.statsContainer}>
+          <Text>Ataque: {pokemon.stats["base-attack"]}</Text>
+          <Text>Defensa: {pokemon.stats["base-defense"]}</Text>
+          <Text>Stamina: {pokemon.stats["base-stamina"]}</Text>
+        </View>
+        <View style={styles.typeContainer}>
+          <Text>Tipo: {pokemon.type.join(', ')}</Text>
+        </View>
+        <Text>Movimientos:</Text>
+        <View style={styles.movesContainer}>
+          {pokemon["special-attack"].map(move => (
+            <Text key={move.name}>{move.name}: {move["base-damage"]} ({move.type})</Text>
+          ))}
+        </View>
+
+
       </View>
-    </>
+    </ScrollView>
   )
 }
 
@@ -34,7 +47,9 @@ export default DetallePokemon
 
 const styles = StyleSheet.create({
   contain: {
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 20,
+    marginBottom: 100
   },
   image: {
     width: 200,
@@ -43,13 +58,36 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     fontWeight: '700',
-    textTransform: 'capitalize'
+    textTransform: 'capitalize',
+    marginBottom: 5,
+  },
+  description: {
+    marginBottom: 20,
+    paddingHorizontal: 20,
+    textAlign: 'center',
+    fontSize: 16,
+    lineHeight: 24,
+  },
+  statsContainer: {
+    marginBottom: 10,
+    flexDirection: 'row',
+    gap: 20
+  },
+  typeContainer: {
+    marginBottom: 10,
+  },
+  movesContainer: {
+    marginBottom: 10,
+    flexDirection: 'row',
+    columnGap: 20,
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+
   },
   favoritoBox: {
-    // backgroundColor: "red",
     flexDirection: 'row',
     width: "100%",
-    justifyContent: 'flex-end',
-    paddingEnd: 20
+    justifyContent: 'space-between',
+    paddingHorizontal:20
   }
 })

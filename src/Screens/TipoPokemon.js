@@ -22,16 +22,17 @@ const TipoPokemon = ({ navigation }) => {
   }, [favoritos])
   return (
     <>
-      <FlatList
-        style={styles.container}
-        data={tipos}
-        keyExtractor={item => item}
-        renderItem={({ item }) => (
-          <Pressable style={styles.containerItem} onPress={() => navigation.navigate("List", { tipo:item.toUpperCase() })} >
-            <Text>{item.toUpperCase()}</Text>
-          </Pressable>
-        )}
-      />
+      <View style={styles.container}>
+        <FlatList         
+          data={tipos}
+          keyExtractor={item => item}
+          renderItem={({ item }) => (
+            <Pressable style={styles.tipoContainer} onPress={() => navigation.navigate("List", { tipo:item.toUpperCase() })} >
+              <Text style={styles.tipoText}>{item.toUpperCase()}</Text>
+            </Pressable>
+          )}
+        />
+      </View>
     </>
   )
 }
@@ -40,16 +41,24 @@ export default TipoPokemon
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingTop: 20,
     marginBottom:100
   },
-  containerItem: {
-    width: "80%",
-    marginHorizontal: "10%",
-    backgroundColor: "green",
-    margin: 10,
-    padding: 10,
-    justifyContent: "center",
-    alignItems: "center"
-  }
-})
+  tipoContainer: {
+    backgroundColor: '#FFCC00',
+    borderRadius: 10,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    marginBottom: 10,
+    marginHorizontal: 20,
+    alignItems: 'center',
+  },
+  tipoText: {
+    fontSize: 18,
+    fontFamily: 'Roboto',
+    color: '#333',
+    fontWeight:'700'
+  },
+});

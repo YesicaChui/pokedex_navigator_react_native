@@ -4,13 +4,13 @@ import FavoritoButton from './FavoritoButton'
 
 const PokemonItem = ({ pokemon,navigation }) => {
   return (
-    <Pressable style={styles.container}  onPress={()=>navigation.navigate("Detalle Pokemon",{id:pokemon.num})}>
+    <Pressable style={styles.container}  onPress={()=>navigation.navigate("Detalle Pokemon",{pokemon:pokemon})}>
       <Image
         style={styles.image}
         resizeMode='cover'
         source={{ uri: pokemon.img }}
       />
-      <Text style={styles.text}>{pokemon.name}</Text>
+      <Text style={styles.text}>{pokemon.name.toUpperCase()}</Text>
       <FavoritoButton pokemon={pokemon}/>
     </Pressable>
   )
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   container: {
     width: "80%",
     height: 100,
-    backgroundColor: "gray",
+    backgroundColor: "#394867",
     marginHorizontal: "10%",
     marginVertical: 10,
     paddingHorizontal: 10,
@@ -31,13 +31,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    gap: 30
   },
   text: {
-    width: "40%",
-    textAlign: "center",
-    fontSize: 15,
-    color:"white"
+    flex: 1,
+        textAlign: "center",
+        fontSize: 18,
+        color:"white",
+
   },
   image: {
     width: 70,
